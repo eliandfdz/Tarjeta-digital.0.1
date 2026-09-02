@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myriam Navarro - Agente de Seguros</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* --- RESET Y ESTILOS GLOBALES --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    /* --- Splash Screen --- */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #splash i {
+      font-size: 70px;
+      color: #0067b1;
+      animation: zoom 1.7s ease-in-out forwards;
+    }
+
+    @keyframes zoom {
+      0% { transform: scale(0.4); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; visibility: hidden; }
+    }
+
+    /* --- CONTENEDOR PRINCIPAL --- */
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background-color: white;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- PORTADA Y HEADER DINÁMICO --- */
+    .header-cover {
+      height: 140px;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1.2s ease-in-out;
+      position: relative;
+    }
+
+    /* --- LAYOUT PRINCIPAL --- */
+    .sketch-layout {
+      display: grid;
+      grid-template-columns: 65px 1fr;
+      padding: 20px 15px 15px 15px;
+      gap: 15px;
+      position: relative;
+    }
+
+    /* --- EJE VERTICAL Y NODOS CIRCULARES --- */
+    .timeline-column {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      min-height: 360px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: #0067b1;
+      z-index: 1;
+    }
+
+    .timeline-node {
+      position: relative;
+      z-index: 2;
+      text-decoration: none;
+    }
+
+    .circle-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid #0067b1;
+      background-color: white;
+      color: #0067b1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .circle-btn:hover {
+      background-color: #0067b1;
+      color: white;
+      transform: scale(1.08);
+    }
+
+    .circle-btn i {
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    /* --- COLUMNA DERECHA --- */
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .profile-box {
+      text-align: center;
+      margin-top: -55px;
+      z-index: 3;
+    }
+
+    .name-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-img-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 8px auto;
+      border-radius: 50%;
+      border: 4px solid #0067b1;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .role-text {
+      font-size: 12px;
+      color: #7f8c8d;
+      font-weight: 500;
+    }
+
+    .contact-info-box {
+      width: 100%;
+      border: 2px solid #0067b1;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 20px 0;
+      background-color: #fafafa;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .contact-info-box h3 {
+      font-size: 11px;
+      color: #0067b1;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #444;
+      margin-top: 6px;
+      text-decoration: none;
+    }
+
+    .contact-row i {
+      color: #0067b1;
+      width: 14px;
+    }
+
+    .cotizar-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-cotizar {
+      padding: 8px 22px;
+      background-color: #0067b1;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0, 103, 177, 0.3);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-cotizar:hover {
+      background-color: #1c8bd4;
+      transform: translateY(-2px);
+    }
+
+    /* --- CARRUSEL ASEGURADORAS --- */
+    .aseguradoras-section {
+      background-color: #ffffff;
+      padding: 20px 0 15px 0;
+      text-align: center;
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid #edf2f7;
+      margin-top: 10px;
+    }
+
+    .aseguradoras-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0067b1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .slider-client {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      width: max-content;
+      gap: 30px;
+      animation: scroll 25s infinite linear;
+    }
+
+    .slider img {
+      width: 110px;
+      height: 55px;
+      object-fit: contain;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .slider img:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* --- BOTÓN DE COTIZAR GRANDE (DEBAJO DE ASEGURADORAS) --- */
+    .cotizar-section-btn {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #ffffff;
+    }
+
+    .btn-cotizar-lg {
+      display: inline-block;
+      padding: 12px 35px;
+      background-color: #0067b1;
+      color: white;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0, 103, 177, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-cotizar-lg:hover {
+      background-color: #1c8bd4;
+      transform: translateY(-2px);
+    }
+
+    /* --- NAV BAR INFERIOR DE REDES SOCIALES --- */
+    .bottom-social-nav {
+      background-color: #0067b1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 14px 0;
+      width: 100%;
+    }
+
+    .bottom-social-nav a {
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .bottom-social-nav a:hover {
+      color: #e0f2fe;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="splash">
+    <i class="fas fa-shield-alt"></i>
+  </div>
+
+  <div class="container">
+    
+    <header class="header-cover" id="dynamic-bg"></header>
+
+    <div class="sketch-layout">
+      
+      <div class="timeline-column">
+        <div class="timeline-line"></div>
+
+        <a href="servicios.html" class="timeline-node" title="Servicios">
+          <div class="circle-btn">
+            <i class="fas fa-concierge-bell"></i>
+            <span>SERV.</span>
+          </div>
+        </a>
+
+        <a href="#aseguradoras" class="timeline-node" title="Aseguradoras">
+          <div class="circle-btn">
+            <i class="fas fa-building"></i>
+            <span>Aseg.</span>
+          </div>
+        </a>
+
+        <a href="tel:+528100000000" class="timeline-node" title="Llamar">
+          <div class="circle-btn">
+            <i class="fas fa-phone-alt"></i>
+            <span>Llamada</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="main-column">
+        
+        <div class="profile-box">
+          <h2 class="name-title">Myriam Navarro</h2>
+          <div class="profile-img-container">
+            <img src="perfil.jpeg" alt="Foto de Perfil">
+          </div>
+          <p class="role-text">Agente Profesional de Seguros</p>
+        </div>
+
+        <div class="contact-info-box">
+          <h3>INFO DE CONTACTO</h3>
+          <a href="tel:+528100000000" class="contact-row">
+            <i class="fas fa-phone"></i>
+            <span>+52 (81) 0000-0000</span>
+          </a>
+          <a href="mailto:contacto@seguros.com" class="contact-row">
+            <i class="fas fa-envelope"></i>
+            <span>contacto@seguros.com</span>
+          </a>
+          <div class="contact-row">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>San Nicolás / MTY</span>
+          </div>
+        </div>
+
+        <div class="cotizar-wrapper">
+          <a href="cotizar.html" class="btn-cotizar">cotizar</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <section id="aseguradoras" class="aseguradoras-section">
+      <div class="aseguradoras-title">Aseguradoras</div>
+      <div class="slider-client">
+        <div class="slider">
+          <img src="AFIRME.png" alt="Afirme">
+          <img src="ANA_SEGUROS.png" alt="ANA Seguros">
+          <img src="AXA_SEGUROS.png" alt="AXA">
+          <img src="ASSIT_CARD.png" alt="Assist Card">
+          <img src="BX+.png" alt="BX+">
+          <img src="SEGUROS_BANORTE.png" alt="Seguros Banorte">
+          <img src="CHUBB.png" alt="Chubb">
+          <img src="GNP.png" alt="GNP Seguros">
+          <img src="MAPFRE.png" alt="Mapfre">
+          <img src="METLIFE.png" alt="Metlife">
+          <img src="QUALITAS.png" alt="Quálitas">
+          <img src="SEGUROS_MONTERREY.png" alt="Seguros Monterrey">
+          <img src="SURA.png" alt="Sura">
+          <img src="ZURICH.png" alt="Zurich">
+
+          <img src="AFIRME.png" alt="Afirme">
+          <img src="ANA_SEGUROS.png" alt="ANA Seguros">
+          <img src="AXA_SEGUROS.png" alt="AXA">
+          <img src="ASSIT_CARD.png" alt="Assist Card">
+          <img src="BX+.png" alt="BX+">
+          <img src="SEGUROS_BANORTE.png" alt="Seguros Banorte">
+          <img src="CHUBB.png" alt="Chubb">
+          <img src="GNP.png" alt="GNP Seguros">
+          <img src="MAPFRE.png" alt="Mapfre">
+          <img src="METLIFE.png" alt="Metlife">
+          <img src="QUALITAS.png" alt="Quálitas">
+          <img src="SEGUROS_MONTERREY.png" alt="Seguros Monterrey">
+          <img src="SURA.png" alt="Sura">
+          <img src="ZURICH.png" alt="Zurich">
+        </div>
+      </div>
+    </section>
+
+    <div class="cotizar-section-btn">
+      <a href="cotizar.html" class="btn-cotizar-lg">
+        <i class="fas fa-calculator"></i> COTIZAR AHORA
+      </a>
+    </div>
+
+    <nav class="bottom-social-nav">
+      <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:contacto@seguros.com" title="Correo Electrónico"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+    }, 1800);
+
+    const imagenes = [
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=800',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800'
+    ];
+    
+    let index = 0;
+    const bg = document.getElementById('dynamic-bg');
+
+    function rotateBackground() {
+      index = (index + 1) % imagenes.length;
+      bg.style.backgroundImage = `linear-gradient(rgba(0,103,177,0.3), rgba(0,0,0,0.3)), url('${imagenes[index]}')`;
+    }
+
+    rotateBackground();
+    setInterval(rotateBackground, 3500);
+  </script>
+</body>
+</html>
