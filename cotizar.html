@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizar Seguro - Myriam Navarro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background-color: white;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Barra Superior con Botón de Regreso */
+    .header-bar {
+      background-color: #0067b1;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .btn-back {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .btn-back:hover {
+      transform: translateX(-3px);
+    }
+
+    .header-bar h1 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* Sección de Formulario */
+    .form-section {
+      padding: 25px 20px 30px 20px;
+    }
+
+    .form-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 12px;
+      color: #7f8c8d;
+      text-align: center;
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+
+    /* Campos y Grids */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #334155;
+      background-color: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #0067b1;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0, 103, 177, 0.15);
+    }
+
+    select.form-control {
+      cursor: pointer;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    /* Secciones Dinámicas */
+    .dynamic-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Checkbox Términos */
+    .terms-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #64748b;
+      margin: 16px 0 20px 0;
+    }
+
+    .terms-box a {
+      color: #0067b1;
+      text-decoration: underline;
+    }
+
+    /* Botón de Enviar (Estilo Naranja Cálido de la Imagen) */
+    .btn-submit {
+      width: 100%;
+      padding: 13px;
+      background-color: #f59e0b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(245, 158, 11, 0.3);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: #d97706;
+      transform: translateY(-1px);
+    }
+
+    /* Nav Bar Inferior de Redes */
+    .bottom-social-nav {
+      background-color: #0067b1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 14px 0;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .bottom-social-nav a {
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .bottom-social-nav a:hover {
+      color: #e0f2fe;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header con regreso -->
+    <div class="header-bar">
+      <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+      <h1>Regresar a Perfil</h1>
+    </div>
+
+    <!-- Formulario de Cotización -->
+    <div class="form-section">
+      <h2 class="form-title">Solicita una cotización</h2>
+      <p class="form-subtitle">Un asesor especializado se pondrá en contacto contigo para entender tu operación y ofrecerte la mejor solución.</p>
+      
+      <form id="cotizarForm">
+
+        <!-- Selección de Tipo de Servicio -->
+        <div class="form-group">
+          <select id="tipoServicio" class="form-control" onchange="toggleFormFields()" required>
+            <option value="" disabled selected>Selecciona el Tipo de Servicio</option>
+            <option value="tractocamiones">Tractocamiones</option>
+            <option value="camiones">Camiones</option>
+            <option value="autos">Autos</option>
+            <option value="mercancia">Transportación de Mercancía</option>
+            <option value="gastos_medicos">Gastos Médicos Mayores</option>
+            <option value="vida">Seguro de Vida</option>
+            <option value="vivienda">Seguro de Vivienda</option>
+            <option value="empresarial">Empresarial</option>
+          </select>
+        </div>
+
+        <!-- Campos de Contacto Base -->
+        <div class="form-group form-row">
+          <input type="text" class="form-control" placeholder="Nombre completo" required>
+          <input type="email" class="form-control" placeholder="Email" required>
+        </div>
+
+        <div class="form-group form-row">
+          <input type="tel" class="form-control" placeholder="Teléfono" required>
+          <input type="text" class="form-control" placeholder="Código postal" required>
+        </div>
+
+        <!-- OPCIÓN A: CAMPOS VEHICULARES (Tractocamiones, Camiones, Autos) -->
+        <div id="vehiculoFields" class="dynamic-section">
+          <div class="form-group form-row">
+            <input type="text" class="form-control" placeholder="Marca">
+            <input type="text" class="form-control" placeholder="Modelo">
+          </div>
+
+          <div class="form-group form-row">
+            <select class="form-control">
+              <option value="" disabled selected>Tipo de Tracto</option>
+              <option value="Sencillo">Sencillo</option>
+              <option value="Doble">Doble</option>
+            </select>
+            <select class="form-control">
+              <option value="" disabled selected>¿Tiene Adaptación?</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <select class="form-control">
+              <option value="" disabled selected>Tipo de Carga</option>
+              <option value="A">Tipo A</option>
+              <option value="B">Tipo B</option>
+              <option value="C">Tipo C</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- OPCIÓN B: CAMPOS ESENCIALES (Cualquier otro servicio) -->
+        <div id="generalFields" class="dynamic-section">
+          <div class="form-group form-row">
+            <input type="number" class="form-control" placeholder="Edad">
+            <select class="form-control">
+              <option value="" disabled selected>Género</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Información adicional"></textarea>
+          </div>
+        </div>
+
+        <!-- Aceptación de Términos -->
+        <div class="terms-box">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">Acepto <a href="#">Términos y condiciones</a></label>
+        </div>
+
+        <!-- Botón Cotizar Ahora -->
+        <button type="submit" class="btn-submit">Cotizar ahora</button>
+
+      </form>
+    </div>
+
+    <!-- Nav Bar Inferior de Redes Sociales -->
+    <nav class="bottom-social-nav">
+      <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:contacto@seguros.com" title="Correo Electrónico"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+  </div>
+
+  <script>
+    // Lógica dinámica para intercalar campos según el servicio elegido
+    function toggleFormFields() {
+      const servicio = document.getElementById('tipoServicio').value;
+      const vehiculoFields = document.getElementById('vehiculoFields');
+      const generalFields = document.getElementById('generalFields');
+
+      if (servicio === 'tractocamiones' || servicio === 'camiones' || servicio === 'autos') {
+        vehiculoFields.style.display = 'block';
+        generalFields.style.display = 'none';
+      } else if (servicio !== '') {
+        vehiculoFields.style.display = 'none';
+        generalFields.style.display = 'block';
+      } else {
+        vehiculoFields.style.display = 'none';
+        generalFields.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
