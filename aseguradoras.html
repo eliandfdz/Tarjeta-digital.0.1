@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aseguradoras - Myriam Navarro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* --- RESET Y ESTILOS GLOBALES --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background-color: white;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- HEADER ESTILO APP --- */
+    .header-bar {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid #f1f5f9;
+      background-color: white;
+    }
+
+    .btn-back {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #f0f7ff;
+      color: #0067b1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background-color: #0067b1;
+      color: white;
+      transform: translateX(-3px);
+    }
+
+    .header-bar h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* --- SECCIÓN PRINCIPAL --- */
+    .aseguradoras-section {
+      padding: 25px 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      color: #1e293b;
+      margin-bottom: 8px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .value-proposition {
+      background-color: #f0f7ff;
+      border-left: 4px solid #0067b1;
+      padding: 15px;
+      border-radius: 0 12px 12px 0;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    /* --- LISTA DE ASEGURADORAS (TARJETAS HORIZONTALES) --- */
+    .partners-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .partner-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    .partner-card:hover {
+      border-color: #0067b1;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,103,177,0.08);
+    }
+
+    .partner-logo {
+      width: 80px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .partner-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: grayscale(10%) contrast(1.1);
+    }
+
+    .partner-info {
+      flex-grow: 1;
+    }
+
+    .partner-info h4 {
+      font-size: 15px;
+      color: #1e293b;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .partner-info p {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.3;
+    }
+
+    /* --- BOTÓN CALL TO ACTION --- */
+    .cta-container {
+      padding: 0 20px 25px 20px;
+    }
+
+    .btn-cotizar-lg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background-color: #0067b1;
+      color: white;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 103, 177, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-cotizar-lg:hover {
+      background-color: #005696;
+      transform: translateY(-2px);
+    }
+
+    /* --- NAV BAR INFERIOR --- */
+    .bottom-social-nav {
+      background-color: #0067b1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 16px 0;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .bottom-social-nav a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      opacity: 0.9;
+    }
+
+    .bottom-social-nav a:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header estilo nativo -->
+    <div class="header-bar">
+      <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i></a>
+      <h1>Socios Comerciales</h1>
+    </div>
+
+    <section class="aseguradoras-section">
+      <div class="section-header">
+        <h2>Aseguradoras Top</h2>
+      </div>
+
+      <!-- El valor del Broker -->
+      <div class="value-proposition">
+        <i class="fas fa-shield-alt" style="color: #0067b1; margin-right: 5px;"></i>
+        <strong>Mi compromiso es contigo.</strong> Al trabajar con las mejores instituciones del país, te garantizo un análisis imparcial para encontrar la cobertura ideal al precio más competitivo.
+      </div>
+      
+      <!-- Lista de Aseguradoras -->
+      <div class="partners-list">
+        
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="QUALITAS.png" alt="Quálitas">
+          </div>
+          <div class="partner-info">
+            <h4>Quálitas</h4>
+            <p>Especialistas y líderes en el mercado de seguros automotrices y equipo pesado.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="GNP.png" alt="GNP Seguros">
+          </div>
+          <div class="partner-info">
+            <h4>GNP Seguros</h4>
+            <p>Excelencia en Gastos Médicos Mayores, protección de vida y ahorro.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="AXA_SEGUROS.png" alt="AXA">
+          </div>
+          <div class="partner-info">
+            <h4>AXA Seguros</h4>
+            <p>Coberturas integrales de clase mundial para empresas, flotillas y salud.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="MAPFRE.png" alt="Mapfre">
+          </div>
+          <div class="partner-info">
+            <h4>Mapfre</h4>
+            <p>Soluciones globales en protección de hogar, auto y responsabilidad civil.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="ANA_SEGUROS.png" alt="ANA Seguros">
+          </div>
+          <div class="partner-info">
+            <h4>ANA Seguros</h4>
+            <p>Atención especializada y rápida respuesta en seguros para vehículos.</p>
+          </div>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">
+            <img src="SEGUROS_MONTERREY.png" alt="Seguros Monterrey">
+          </div>
+          <div class="partner-info">
+            <h4>Seguros Monterrey</h4>
+            <p>Sólido respaldo patrimonial e instrumentos de inversión a largo plazo.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Botón Call to Action -->
+    <div class="cta-container">
+      <a href="cotizar.html" class="btn-cotizar-lg">
+        <i class="fas fa-file-signature"></i> Solicitar Análisis Imparcial
+      </a>
+    </div>
+
+    <!-- Barra Social Inferior -->
+    <nav class="bottom-social-nav">
+      <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:myriamnavarroseguros72@gmail.com" title="Correo Electrónico"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+  </div>
+
+</body>
+</html>
